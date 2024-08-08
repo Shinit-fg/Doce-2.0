@@ -1,0 +1,106 @@
+package javaapplication12;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class JavaApplication12 {
+    
+    public static void main(String[] args) {
+        String[] options = {"BorderLayout", "GridLayout"};
+        int choice = JOptionPane.showOptionDialog(null, "Escolha o layout para a Loja de Doces:", "Escolha de Layout",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+
+        if (choice == 0) {
+            new LojaDocesBorderLayout();
+        } else {
+            new LojaDocesGridLayout();
+        }
+    }
+}
+
+class LojaDocesBorderLayout {
+    private JFrame frame;
+    private JButton pedirButton;
+    private JTextField doce1Field, doce2Field, doce3Field;
+    private final double doce1Preco = 1.50, doce2Preco = 4.00, doce3Preco = 8.50;
+
+    public LojaDocesBorderLayout() {
+        frame = new JFrame("Venda de Doces - BorderLayout");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(300, 200);
+
+        pedirButton = new JButton("Pedir");
+        pedirButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int doce1Quantidade = Integer.parseInt(doce1Field.getText());
+                int doce2Quantidade = Integer.parseInt(doce2Field.getText());
+                int doce3Quantidade = Integer.parseInt(doce3Field.getText());
+
+                double total = doce1Quantidade * doce1Preco + doce2Quantidade * doce2Preco + doce3Quantidade * doce3Preco;
+
+                JOptionPane.showMessageDialog(frame, "Total da compra: R$ " + total);
+            }
+        });
+
+        doce1Field = new JTextField();
+        doce2Field = new JTextField();
+        doce3Field = new JTextField();
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(3, 2));
+        panel.add(new JLabel("Brigadeiro (R$1.50):"));
+        panel.add(doce1Field);
+        panel.add(new JLabel("Biscoito (R$4.00):"));
+        panel.add(doce2Field);
+        panel.add(new JLabel("Pudin (R$8.50):"));
+        panel.add(doce3Field);
+
+        frame.getContentPane().add(panel, BorderLayout.CENTER);
+        frame.getContentPane().add(pedirButton, BorderLayout.SOUTH);
+        frame.setVisible(true);
+    }
+}
+
+class LojaDocesGridLayout {
+    private JFrame frame;
+    private JButton pedirButton;
+    private JTextField doce1Field, doce2Field, doce3Field;
+    private final double doce1Preco = 1.50, doce2Preco = 4.00, doce3Preco = 8.50;
+
+    public LojaDocesGridLayout() {
+        frame = new JFrame("Venda de Doces - GridLayout");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(300, 200);
+
+        pedirButton = new JButton("Pedir");
+        pedirButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int doce1Quantidade = Integer.parseInt(doce1Field.getText());
+                int doce2Quantidade = Integer.parseInt(doce2Field.getText());
+                int doce3Quantidade = Integer.parseInt(doce3Field.getText());
+
+                double total = doce1Quantidade * doce1Preco + doce2Quantidade * doce2Preco + doce3Quantidade * doce3Preco;
+
+                JOptionPane.showMessageDialog(frame, "Total da compra: R$ " + total);
+            }
+        });
+
+        doce1Field = new JTextField();
+        doce2Field = new JTextField();
+        doce3Field = new JTextField();
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(4, 2));
+        panel.add(new JLabel("Brigadeiro (R$1.50):"));
+        panel.add(doce1Field);
+        panel.add(new JLabel("Biscoito (R$4.00):"));
+        panel.add(doce2Field);
+        panel.add(new JLabel("Pudin (R$8.50):"));
+        panel.add(doce3Field);
+        panel.add(new JLabel()); // Empty cell for layout alignment
+        panel.add(pedirButton);
+
+        frame.getContentPane().add(panel, BorderLayout.CENTER);
+        frame.setVisible(true);
+    }
+}
